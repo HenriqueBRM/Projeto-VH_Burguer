@@ -111,7 +111,7 @@ namespace VH_Burguer.Applications.Services
                 throw new DomainException("Produto nao encontrado");
             }
 
-            if (_repository.NomeExiste(produtoDto.Nome, produtoIdAtual:))
+            if (_repository.NomeExiste(produtoDto.Nome, produtoIdAtual:id))
             {
                 throw new DomainException("Ja existe outro produto com esse nome");
             }
