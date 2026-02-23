@@ -1,8 +1,8 @@
-﻿using VH_Burguer.Applications.Autenticacao;
-using VH_Burguer.Domains;
+﻿using VH_Burguer.Domains;
 using VH_Burguer.DTOs.AutenticacaoDto;
 using VH_Burguer.Exceptions;
 using VH_Burguer.Interfaces;
+using VHBurguer.Applications.Autenticacao;
 
 namespace VH_Burguer.Applications.Services
 {
