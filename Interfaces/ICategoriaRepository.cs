@@ -7,7 +7,7 @@ namespace VH_Burguer.Interfaces
         List<Categoria> Listar();
         Categoria ObterPorId(int id);
 
-        bool NomeExiste(string nome, int? categoriaAtual = null);
+        bool NomeExiste(string nome, int? categoriaIdAtual = null);
 
         void Adicionar(Categoria categoria);
         void Atualizar(Categoria categoria);
