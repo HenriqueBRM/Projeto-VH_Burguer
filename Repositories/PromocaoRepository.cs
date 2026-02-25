@@ -6,7 +6,7 @@ namespace VH_Burguer.Repositories
 {
     public class PromocaoRepository : IPromocaoRepository
     {
-        private readonly VH_BurguerContext _context
+        private readonly VH_BurguerContext _context;
 
         public PromocaoRepository(VH_BurguerContext context)
         {

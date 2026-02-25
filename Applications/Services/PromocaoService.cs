@@ -34,7 +34,7 @@ namespace VH_Burguer.Applications.Services
         {
             Promocao promocao = _repository.ObterPorId(id);
 
-            if(promocao == null)
+            if (promocao == null)
             {
                 throw new DomainException("Promocao nao encontrada");
             }
@@ -50,7 +50,7 @@ namespace VH_Burguer.Applications.Services
             return promocaoDto;
         }
 
-        private static void ValidarNomes(string nome)
+        private static void ValidarNome(string nome)
         {
             if (string.IsNullOrWhiteSpace(nome))
             {
@@ -60,7 +60,7 @@ namespace VH_Burguer.Applications.Services
 
         public void Adicionar(CriarPromocaoDto promoDto)
         {
-            ValidarNomes(promoDto.Nome);
+            ValidarNome(promoDto.Nome);
             ValidarDataExpiracaoPromocao.ValidarDataExpiracao(promoDto.DataExpiracao);
 
             if (_repository.NomeExiste(promoDto.Nome))
@@ -76,6 +76,39 @@ namespace VH_Burguer.Applications.Services
             };
 
             _repository.Adicionar(promocao);
+        }
+
+        public void Atualizar(int id, CriarPromocaoDto promoDto)
+        {
+            ValidarNome(promoDto.Nome);
+
+            Promocao promocaoBanco = _repository.ObterPorId(id);
+
+            if (promocaoBanco == null)
+            {
+                throw new DomainException("Promocao nao encontrada");            
+            }
+            if (_repository.NomeExiste(promoDto.Nome, promocaoIdAtual:id))
+            {
+                throw new DomainException("Ja existe outra promocao com esse nome");
+            }
+
+            promocaoBanco.Nome = promoDto.Nome;
+            promocaoBanco.DataExpiracao = promoDto.DataExpiracao;
+            promocaoBanco.StatusPromocao = promoDto.StatusPromocao;
+
+            _repository.Atualizar(promocaoBanco);
+        }
+
+        public void Remover(int id)
+        {
+            Promocao promocaoBanco = _repository.ObterPorId(id);
+            if (promocaoBanco == null)
+            {
+                throw new DomainException("Promocao nao encontrada");
+            }
+
+            _repository.Remover(id);
         }
     }
 }
