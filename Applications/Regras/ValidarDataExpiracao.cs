@@ -11,7 +11,5 @@ namespace VH_Burguer.Applications.Regras
                 throw new DomainException("Data de expiracao deve ser futura");
             }
         }
-
-
     }
 }

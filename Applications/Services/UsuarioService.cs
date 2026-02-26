@@ -48,6 +48,15 @@ namespace VH_Burguer.Applications.Services
             }
         }
 
+        private static void ValidarNome(string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                throw new DomainException("Nome inválido.");
+            }
+        }
+
+
         private static byte[] HashSenha(string senha)
         {
             if (string.IsNullOrWhiteSpace(senha))
@@ -85,6 +94,7 @@ namespace VH_Burguer.Applications.Services
         public LerUsuarioDto Adicionar(CriarUsuarioDto usuarioDto)
         {
             ValidarEmail(usuarioDto.Email);
+            ValidarNome(usuarioDto.Nome);
 
             if (_repository.EmailExiste(usuarioDto.Email))
             {
@@ -125,7 +135,9 @@ namespace VH_Burguer.Applications.Services
                 throw new DomainException("Ja existe um usuario com este e-mail");
             }
 
-            usuarioBanco.Nome = usuarioDto.Nome;
+        
+
+        usuarioBanco.Nome = usuarioDto.Nome;
             usuarioBanco.Email = usuarioDto.Email;
             usuarioBanco.Senha = HashSenha(usuarioDto.Senha);
 

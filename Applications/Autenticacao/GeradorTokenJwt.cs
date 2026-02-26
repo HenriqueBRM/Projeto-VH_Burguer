@@ -2,6 +2,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using VH_Burguer.Applications.Regras;
 using VH_Burguer.Domains;
 using VH_Burguer.Exceptions;
 
@@ -20,6 +21,8 @@ namespace VHBurguer.Applications.Autenticacao
 
         public string GerarToken(Usuario usuario)
         {
+            ValidarAtividadeUsuario.ValidarUsuario(usuario.StatusUsuario);
+
             // KEY -> chave secreta usada para assinar o token
             // garante que o token nao foi alterado
             var chave = _config["Jwt:Key"]!;
